@@ -1,0 +1,70 @@
+import java.io.*;
+import java.util.Scanner;
+import java.lang.Math.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int len = 0;
+
+    while (len < 10) {  //checks that array length is 10 or greater
+    System.out.println("Enter an array length (must be 10 or greater):");
+    len = scan.nextInt();
+    System.out.println("");
+    }
+
+    //Create and fill both arrays.
+    int []list1 = new int [len];
+    int []list2 = new int [len];
+    for(int i = 0; i<len; i++){
+      list1[i] = (int)(Math.random()*100)+1;
+      }
+    for (int i = 0; i<len;i++){
+      list2[i] = (int)(Math.random()*100)+1;
+    }
+    //Print first array.
+    System.out.print("First Array: ");
+    for (int i = 0; i < len-1; i++) {
+      System.out.print(list1[i] + " ");
+    }
+    System.out.print(list1[len-1] + "\n\n");
+    //Print second array.
+    System.out.print("Second Array: ");
+    for (int i = 0; i < len-1; i++) {
+      System.out.print(list2[i] + " ");
+    }
+    System.out.print(list2[len-1] + "\n\n");
+
+    //Create merged array.
+    int mergeSize = len*2;
+    int []listMerge = new int [mergeSize];
+
+    int fillPos = 0; //adjusts based on how long the merge array is as it is filled
+    for(int i = 0; i < len; i++) {
+      boolean match = false;
+      for(int j = 0; j<fillPos; j++)
+        if(listMerge[j]==list1[i]) match = true; //checks for duplicates
+       if(!match) { //fills from first array
+        listMerge[fillPos] = list1[i];
+        fillPos++;
+      }
+      
+      //repeat for second array
+      match = false;
+      for(int j = 0; j<fillPos; j++) {
+        if(listMerge[j]==list2[i]) match = true;
+      }
+      if(!match) {
+        listMerge[fillPos] = list2[i];
+        fillPos++;
+      }
+    }
+    
+    // Prints the elements in the merged array
+    System.out.print("Merged Array: ");
+    for(int i = 0; i < fillPos; i++)
+    {
+      System.out.print(listMerge[i] + " ");
+    }
+  }
+}
